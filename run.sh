@@ -7,7 +7,7 @@ JAVA_OPTS='-server -XX:+AggressiveOpts -XX:CompileThreshold=1000'
 java -version
 
 classes='org.kot.test.sma.SMAAlgorithm'
-threads='1 2 4'
+threads='1 2 4 8'
 symbols='EUR/USD EUR/UAH'
 
 for n in $threads; do

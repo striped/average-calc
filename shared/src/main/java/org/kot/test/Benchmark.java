@@ -46,12 +46,12 @@ public class Benchmark {
 		}
 		executor.shutdown();
 
-		long time = 0;
+		double time = 0;
 		for (Future<Long> task : generators) {
 			time += task.get();
 		}
 
-		System.out.printf("Total time: %,d%n", time);
+		System.out.printf("Execution time (%d workers, %d iterations): %,f ns%n", threads, ITERATIONS, time / threads);
 	}
 
 	static class Generator implements Callable<Long> {
@@ -67,7 +67,7 @@ public class Benchmark {
 
 		@Override
 		public Long call() throws Exception {
-			final long warmUp = ITERATIONS << 2;
+			final long warmUp = ITERATIONS * 1000;
 			for (long i = 0; i < warmUp; i++) {
 				algorithm.update(symbols[(int) i % 2], (int)i);
 			}
