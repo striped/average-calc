@@ -17,7 +17,7 @@ import java.util.concurrent.Future;
  */
 public class Benchmark {
 
-	public static final int ITERATIONS = 1000;
+	public static final int ITERATIONS = 1000000;
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
@@ -67,15 +67,17 @@ public class Benchmark {
 
 		@Override
 		public Long call() throws Exception {
-			final long warmUp = ITERATIONS * 1000;
-			for (long i = 0; i < warmUp; i++) {
-				algorithm.update(symbols[(int) i % 2], (int)i);
-			}
+            doWork(); // warm up
+            Thread.sleep(1000);
 			long time = System.nanoTime();
-			for (int i = 0; i < ITERATIONS; i++) {
-				algorithm.update(symbols[i % 2], i);
-			}
+            doWork();
 			return System.nanoTime() - time;
 		}
+
+        private void doWork() {
+            for (int i = 0; i < ITERATIONS; i++) {
+                algorithm.update(symbols[i % 2], i);
+            }
+        }
 	}
 }
