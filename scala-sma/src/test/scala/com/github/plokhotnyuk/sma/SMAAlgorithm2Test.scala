@@ -10,8 +10,7 @@ import org.scalacheck.{Test => ScalacheckTest}
 import org.scalacheck.Test.Parameters
 
 class SMAAlgorithm2Test {
-
-  @Test def shouldCalcSumOfLastPrices(): Unit = assertTrue(doCheck(Prop.forAll {
+  @Test def shouldCalcSumOfLastPrices(): Unit = check(Prop.forAll {
     (prices: List[Int]) =>
       val completionFlag = new CountDownLatch(1)
       val actor = SMAAlgorithm2.createActor()
@@ -24,7 +23,7 @@ class SMAAlgorithm2Test {
       }
       completionFlag.await(100, TimeUnit.MILLISECONDS)
       sum == prices.takeRight(Algorithm.DEPTH).sum
-  }))
+  })
 
-  def doCheck(p: Prop): Boolean = ScalacheckTest.check(Parameters.defaultVerbose, p).passed
+  private def check(p: Prop): Unit = assertTrue(ScalacheckTest.check(Parameters.defaultVerbose, p).passed)
 }
