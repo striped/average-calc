@@ -26,7 +26,7 @@ public class Benchmark {
 					"Usage %s <class> <threads> <symbol>[ <symbol>]%n" +
 					"\tclass - algorithm implementation%n" +
 					"\tthreads - number of threads%n" +
-					"\tsymbol - product symbol(s)",
+					"\tsymbol - product symbol(s)%n",
 					Benchmark.class.getName()
 			);
 			System.exit(13);
@@ -51,7 +51,7 @@ public class Benchmark {
 			time += task.get();
 		}
 
-		System.out.printf("Execution time (%d workers, %d iterations): %,f ns%n", threads, ITERATIONS, time / threads);
+		System.out.printf("[%s]: Execution time (%d workers, %d iterations): %,f ns%n", algorithm.getClass().getName(), threads, ITERATIONS, time / threads);
 	}
 
 	static class Generator implements Callable<Long> {
@@ -76,7 +76,7 @@ public class Benchmark {
 
         private void doWork() {
             for (int i = 0; i < ITERATIONS; i++) {
-                algorithm.update(symbols[i % 2], i);
+                algorithm.update(symbols[i % symbols.length], i);
             }
         }
 	}

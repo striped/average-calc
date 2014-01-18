@@ -64,10 +64,10 @@
                     <configuration>
                         <charset>${project.build.sourceEncoding}</charset>
                         <args>
-                            <arg>-target:jvm-1.7</arg>
                             <arg>-optimise</arg>
                             <arg>-deprecation</arg>
                             <arg>-unchecked</arg>
+	                        <arg>-target:jvm-1.6</arg>
                         </args>
                         <jvmArgs>
                             <jvmArg>-server</jvmArg>
