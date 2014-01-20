@@ -4,10 +4,26 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.kot.test</groupId>
-        <artifactId>average-calc</artifactId>
+        <artifactId>average-calc-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
+	    <relativePath>../parent/pom.xml</relativePath>
     </parent>
+
     <artifactId>shared</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>shared</name>
+
+    <name>Shared stuff</name>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

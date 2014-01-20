@@ -2,6 +2,7 @@ package org.kot.test.sma;
 
 import org.kot.test.Algorithm;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,34 +10,37 @@ import java.util.Map;
  * Description.
  * @author <a href=mailto:striped@gmail.com>striped</a>
  * @todo Add JavaDoc
- * @created 15/01/2014 21:06
+ * @created 19/01/2014 01:34
  */
-public class SMAAlgorithm implements Algorithm {
+public class SMAAlgorithm3 implements Algorithm {
 
+	final String[] symbols;
 
-	final Map<String, MarketData> buckets;
+	final MarketData[] buckets;
 
-	public SMAAlgorithm(final String... symbols) {
+	public SMAAlgorithm3(final String... symbols) {
 		if (null == symbols || 0 > symbols.length) {
 			throw new IllegalArgumentException("Product list is not defined");
 		}
-		buckets = new HashMap<String, MarketData>(symbols.length, 1.0f);
-		for (String symbol : symbols) {
-			buckets.put(symbol, new MarketData(DEPTH));
+		buckets = new MarketData[symbols.length];
+		for (int i = 0; i < buckets.length; i++) {
+			buckets[i] = new MarketData(DEPTH);
 		}
+		Arrays.sort(symbols);
+		this.symbols = symbols;
 	}
 
 	@Override
 	public void update(final String symbol, final int value) {
-		final MarketData bucket = buckets.get(symbol);
-		if (null == bucket) {
+		final int idx = Arrays.binarySearch(symbols, symbol);
+		if (0 > idx) {
 			return;
 		}
-		bucket.put(value);
+		buckets[idx].put(value);
 	}
 
 	public boolean isValid() {
-		for (MarketData bucket : buckets.values()) {
+		for (MarketData bucket : buckets) {
 			if (!bucket.isValid()) {
 				return false;
 			}
