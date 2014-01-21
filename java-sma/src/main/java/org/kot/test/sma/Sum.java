@@ -14,12 +14,11 @@ class Sum extends AtomicInteger {
 		super(start);
 	}
 
-	public double add(final int addendum) {
+	public void add(final int addendum) {
 		for (;;) {
-			final int current = get();
-			int next = current + addendum;
-			if (compareAndSet(current, next)) {
-				return next;
+			int current = get();
+			if (compareAndSet(current, current + addendum)) {
+				return;
 			}
 		}
 	}

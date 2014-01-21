@@ -18,9 +18,10 @@ class Position extends AtomicInteger {
 	}
 
 	public int moveOn() {
+		final int size = limit;
 		for (;;) {
 			final int current = get();
-			if (compareAndSet(current, (current + 1) % limit)) {
+			if (compareAndSet(current, (current + 1) % size)) {
 				return current;
 			}
 		}

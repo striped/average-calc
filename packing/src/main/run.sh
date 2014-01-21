@@ -8,10 +8,10 @@ symbols='EUR/USD EUR/UAH'
 
 for n in $threads; do
 	for class in $classes; do
-		for attmpt in 1..3; do
+		for attmpt in {1..3}; do
             [ -f ./$class-opts.sh ] && . ./$class-opts.sh || . ./opts.sh
 			java $JAVA_OPTS -cp "$CP" org.kot.test.Benchmark $class $n $symbols $@
-			sleep 2
+			sleep 5
 		done
 	done
 done
