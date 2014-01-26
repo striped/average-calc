@@ -43,7 +43,6 @@
         <testSourceDirectory>src/test/scala</testSourceDirectory>
 	    <plugins>
 		    <plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-compiler-plugin</artifactId>
 			    <executions>
 				    <execution>
@@ -92,10 +91,6 @@
 					    </goals>
 				    </execution>
 			    </executions>
-		    </plugin>
-		    <plugin>
-			    <groupId>net.alchim31.maven</groupId>
-			    <artifactId>scala-maven-plugin</artifactId>
 		    </plugin>
 	    </plugins>
     </build>
